@@ -5,7 +5,7 @@
 int sum = 0;
 void Add(uint32_t id) {
   std::cout << "Start thread " << id << std::endl;
-  for (int i = 0; i < 1000000; i++)
+  for (int i = 0; i < 1000000000; i++)
     sum++;
   std::cout << "End thread " << id << std::endl;
 }
