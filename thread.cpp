@@ -1,25 +1,19 @@
-#include <iostream>
 #include <chrono>
+#include <iostream>
 #include <thread>
 
-void independentThread()
-{
-    std::cout << "Starting concurrent thread.\n";
-    std::this_thread::sleep_for(std::chrono::seconds(2));
-    std::cout << "Exiting concurrent thread.\n";
+int sum = 0;
+void Add() {
+  for (int i = 0; i < 10000; i++)
+    sum++;
 }
 
-void threadCaller()
-{
-    std::cout << "Starting thread caller.\n";
-    std::thread t(independentThread);
-    //t.detach();
-    std::this_thread::sleep_for(std::chrono::seconds(1));
-    std::cout << "Exiting thread caller.\n";
-}
+void threadCaller() {}
 
-int main()
-{
-    threadCaller();
-    std::this_thread::sleep_for(std::chrono::seconds(5));
+int main() {
+  std::thread t1(Add);
+  std::thread t2(Add);
+  t1.join();
+  t2.join();
+  std::cout << sum << std::endl;
 }
